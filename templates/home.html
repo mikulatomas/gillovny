@@ -6,4 +6,9 @@
 
 
 {% block main %}
+{{ text }}
+{{ images }}
+{% for url in images %}
+    <img src="{{ url }}">
+{% endfor %}
 {% endblock %}

@@ -7,12 +7,20 @@ This file creates your application.
 """
 
 import os
-from flask import Flask, render_template, request, redirect, url_for
+import random
+
+import tweepy
+from flask import Flask, redirect, render_template, request, url_for
+from tweepy import OAuthHandler
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configured')
+app.config['SECRET_KEY'] = str(os.environ.get('SECRET_KEY'))
+app.config['CONSUMER_KEY'] = str(os.environ.get('CONSUMER_KEY'))
+app.config['CONSUMER_SECRET'] = str(os.environ.get('CONSUMER_SECRET'))
 
+auth = OAuthHandler(app.config['CONSUMER_KEY'], app.config['CONSUMER_SECRET'])
+api = tweepy.API(auth)
 
 ###
 # Routing for your application.
@@ -21,25 +29,56 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'this_should_be_configur
 @app.route('/')
 def home():
     """Render website's home page."""
-    return render_template('home.html')
+    query = 'gillovny -filter:retweets'
+
+    MAX_TWEETS = 100
+
+    tweets = []
+
+    for tweet in tweepy.Cursor(api.search,
+                               q=query,
+                               count=100,
+                               include_entities=True,
+                               lang='en',
+                               result_type='recent').items():
+
+        # Ignore retweets
+        if (not tweet.retweeted) and ('RT @' not in tweet.text) and (tweet.text[0] != '@'):
+            tweets.append(tweet)
+
+        if len(tweets) > MAX_TWEETS:
+            break
+
+    # Select random tweet
+    tweet = random.choice(tweets)
+
+    text = tweet.text
+    images = []
+
+    if 'media' in tweet.entities:
+        for image in tweet.entities['media']:
+            images.append(image['media_url'])
+
+    print(images)
+    return render_template('home.html', text=text, images=images)
 
 
-@app.route('/about/')
-def about():
-    """Render the website's about page."""
-    return render_template('about.html')
-
+# @app.route('/about/')
+# def about():
+#     """Render the website's about page."""
+#     return render_template('about.html')
+#
 
 ###
 # The functions below should be applicable to all Flask apps.
 ###
 
-@app.route('/<file_name>.txt')
-def send_text_file(file_name):
-    """Send your static text file."""
-    file_dot_text = file_name + '.txt'
-    return app.send_static_file(file_dot_text)
-
+# @app.route('/<file_name>.txt')
+# def send_text_file(file_name):
+#     """Send your static text file."""
+#     file_dot_text = file_name + '.txt'
+#     return app.send_static_file(file_dot_text)
+#
 
 @app.after_request
 def add_header(response):
