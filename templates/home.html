@@ -1,14 +1,39 @@
 {% extends "base.html" %}
 
 
-{% block js %}
-{% endblock %}
-
-
 {% block main %}
-{{ text }}
-{{ images }}
-{% for url in images %}
-    <img src="{{ url }}">
-{% endfor %}
+<div class="container">
+    <div class="row">
+        {{ text }}
+        {% if images %}
+            {% for url in images %}
+                <img src="{{ url }}">
+            {% endfor %}
+        {% elif videos %}
+            {% for url in videos %}
+                <video width="320" height="240" controls>
+                    <source src="{{ url }}" type="video/mp4">
+                </video>
+            {% endfor %}
+        {% elif youtube %}
+            {% for id in youtube %}
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            {% endfor %}
+        {% elif instagram %}
+            {% for id in instagram %}
+                <img src="https://instagram.com/p/{{ id  }}/media/?size=l">
+            {% endfor %}
+        {% elif urls %}
+            {% for url in urls %}
+                <a href="{{ url }}">{{ url }}</a>
+            {% endfor %}
+        {% endif %}
+        <br>
+        {% for key, value in raw.items() %}
+            {{ key }}: {{ value }}
+            <br/>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
+
