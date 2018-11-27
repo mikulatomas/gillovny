@@ -3,37 +3,88 @@
 
 {% block main %}
 <div class="container">
-    <div class="row">
-        {{ text }}
-        {% if images %}
-            {% for url in images %}
-                <img src="{{ url }}">
-            {% endfor %}
-        {% elif videos %}
-            {% for url in videos %}
-                <video width="320" height="240" controls>
-                    <source src="{{ url }}" type="video/mp4">
-                </video>
-            {% endfor %}
-        {% elif youtube %}
-            {% for id in youtube %}
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            {% endfor %}
-        {% elif instagram %}
-            {% for id in instagram %}
-                <img src="https://instagram.com/p/{{ id  }}/media/?size=l">
-            {% endfor %}
-        {% elif urls %}
-            {% for url in urls %}
-                <a href="{{ url }}">{{ url }}</a>
-            {% endfor %}
-        {% endif %}
-        <br>
-        {% for key, value in raw.items() %}
-            {{ key }}: {{ value }}
-            <br/>
-        {% endfor %}
-    </div>
+<div class="row" >
+            <div id="content">
+                <div class="loading">
+                    Loading content...
+                </div>
+            </div>
+
 </div>
+    <div class="row">
+        <div class="col-10 offset-1">
+        <p id="text">{{ text }}</p>
+        </div>
+    </div>
+
+    <div class="row" >
+
+        <div class="col-10 offset-1">
+        <div id="info">
+        <span><i class="far fa-user"></i><span class="text" id="user"></span></span>
+        <span><i class="far fa-retweet"></i><span class="text" id="retweet"></span></span>
+
+        <span><i class="far fa-heart"></i><span class="text" id="favorite"></span></span>
+
+        <button type="button" class="float-right" id="next">Give me more!</button>
+        </div>
+        </div>
+    </div>
+            </div>
+</div>
+{% endblock %}
+
+
+{% block js %}
+<script type=text/javascript>
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    $(document).ready(function() {
+
+    function get_data() {
+		$.ajax({
+			dataType: "json",
+			url: $SCRIPT_ROOT + '/api/',
+			cache: false,  //do not cache
+			success: function(data){
+				$("#text").text(data.text); 
+
+                var html = ``;
+				if (data.images.length != 0) {
+                    if (data.images.length > 1) {
+                        html += `<div class="thumbnail half"><img src="${data.images[0]}"></div>`;
+                        html += `<div class="thumbnail half"><img src="${data.images[1]}"></div>`;
+                    } else {
+
+                        html += `<div class="thumbnail"><img src="${data.images[0]}"></div>`;
+                    }
+                } else if (data.youtube.length != 0) {
+                    html += `<iframe width="560" height="315" src="https://www.youtube.com/embed/${data.youtube[0]}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                } else if (data.videos.length != 0) {
+                    html += `<video width="560" height="315" controls>
+                        <source src="${data.videos[0]}" type="video/mp4">
+                            </video>`;
+                } else if (data.instagram.length != 0) {
+                    html += `<div class="thumbnail"><img src="https://instagram.com/p/${data.instagram[0]}/media/?size=l"></div>`;
+                } else if (data.urls.length != 0) {
+                    html += `<div class="urls">`;
+                    data.urls.forEach(url => {
+                        html += `<a href="${url}">${url}</a>`;
+                    });
+                    html += `</div>`;
+                }
+
+                $("#content").html(html);		
+                $("#user").text(data.user);
+                $("#retweet").text(data.retweet);
+                $("#favorite").text(data.favorite);
+            }
+			});
+    }
+
+        get_data();
+
+        $('#next').click(get_data);
+    });
+</script>
 {% endblock %}
 
