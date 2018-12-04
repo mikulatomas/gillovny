@@ -173,7 +173,7 @@ def api():
             else:
                 urls.append(url)
 
-    user = tweet.user.name
+    user = '@{}'.format(tweet.user.screen_name)
     retweet = tweet.retweet_count
     favorite = tweet.favorite_count
 

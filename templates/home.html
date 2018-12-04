@@ -71,6 +71,9 @@
                         html += `<a href="${url}">${url}</a>`;
                     });
                     html += `</div>`;
+                } else {
+                    $("#text").text(""); 
+                    html += `<div class="text">"${data.text}"</div>`;
                 }
 
                 $("#content").html(html);		

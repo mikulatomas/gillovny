@@ -20,16 +20,11 @@ a:hover {
         max-width: 970px;
     }
 }
-.far {
+.far, .fab, .fas {
     color: @main-color;
-
-        font-size: 1.3rem;
+    font-size: 1.3rem;
 }
-.fab {
-    color: @main-color;
 
-        font-size: 1.3rem;
-}
 header {
     margin-top: 2rem;
     #title {
@@ -69,11 +64,27 @@ header {
         font-weight: 500;
         color: @dark-gray;
     }
-    .urls, video, iframe, .loading {
+    .urls, video, iframe, .loading, .text {
         position: absolute;
         top: 50%;
         transform: translate(-50%, -50%);
     }
+
+    .text, .url {
+        top: 70%;
+        font-size: 1.4rem;
+        font-style: italic;
+        text-align: center;
+        width: 400px;
+
+               
+    }
+ .text a {
+font-size: 1.4rem;
+font-style: italic;
+text-align: center;
+}
+
 }
 
 #text {
@@ -142,4 +153,16 @@ header {
 .thumbnail img.portrait {
   width: 100%;
   height: auto;
+}
+
+footer {
+    font-size: 0.9rem;
+    color: @dark-gray;
+    text-align: center;
+    font-weight: 300;
+    margin-top: 4rem;
+
+    .fas {
+        font-size: 0.9rem;
+    }
 }
