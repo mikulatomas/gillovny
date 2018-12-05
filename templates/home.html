@@ -46,7 +46,7 @@
 			url: $SCRIPT_ROOT + '/api/',
 			cache: false,  //do not cache
 			success: function(data){
-				$("#text").text(data.text); 
+				$("#text").html(data.text); 
 
                 var html = ``;
 				if (data.images.length != 0) {
@@ -65,13 +65,7 @@
                             </video>`;
                 } else if (data.instagram.length != 0) {
                     html += `<div class="thumbnail"><img src="https://instagram.com/p/${data.instagram[0]}/media/?size=l"></div>`;
-                } else if (data.urls.length != 0) {
-                    html += `<div class="urls">`;
-                    data.urls.forEach(url => {
-                        html += `<a href="${url}">${url}</a>`;
-                    });
-                    html += `</div>`;
-                } else {
+                                } else {
                     $("#text").text(""); 
                     html += `<div class="text">"${data.text}"</div>`;
                 }

@@ -9,6 +9,8 @@ This file creates your application.
 import os
 import random
 
+import bleach
+
 import tweepy
 from flask import Flask, jsonify, redirect, render_template, request, url_for
 from flask_caching import Cache
@@ -131,7 +133,7 @@ def api_url():
 def api():
     tweets = get_dataset()
     tweet = random.choice(tweets)
-    text = tweet.full_text
+    text = bleach.linkify(tweet.full_text)
 
     images = []
     videos = []

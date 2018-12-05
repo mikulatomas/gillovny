@@ -4,6 +4,7 @@
 flask
 tweepy
 flask-caching
+bleach
 
 # ----------------------
 # Testing
