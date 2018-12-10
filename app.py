@@ -21,6 +21,7 @@ app = Flask(__name__)
 cache = Cache()
 
 cache_servers = os.environ.get('MEMCACHIER_SERVERS')
+google_id = os.environ.get('GOOGLE_ID')
 
 if cache_servers is None:
     # Fall back to simple in memory cache (development)
@@ -171,6 +172,9 @@ def add_header(response):
     response.headers['Cache-Control'] = 'public, max-age=600'
     return response
 
+@app.context_processor
+def google_analytics():
+    return dict(google_id=google_id)
 
 @app.errorhandler(404)
 def page_not_found(error):
