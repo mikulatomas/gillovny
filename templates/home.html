@@ -58,9 +58,9 @@
                         html += `<div class="thumbnail"><img src="${data.images[0]}"></div>`;
                     }
                 } else if (data.youtube.length != 0) {
-                    html += `<iframe width="560" height="315" src="https://www.youtube.com/embed/${data.youtube[0]}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                    html += `<iframe src="https://www.youtube.com/embed/${data.youtube[0]}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
                 } else if (data.videos.length != 0) {
-                    html += `<video width="560" height="315" controls>
+                    html += `<video controls>
                         <source src="${data.videos[0]}" type="video/mp4">
                             </video>`;
                 } else if (data.instagram.length != 0) {
