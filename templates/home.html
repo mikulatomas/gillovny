@@ -3,34 +3,32 @@
 
 {% block main %}
 <div class="container">
-<div class="row" >
-            <div id="content">
-                <div class="loading">
-                    Loading content...
-                </div>
+    <div class="row" >
+        <div id="content">
+            <div class="loading">
+                Loading content...
             </div>
+        </div>
+    </div>
 
-</div>
     <div class="row">
         <div class="col-10 offset-1">
-        <p id="text">{{ text }}</p>
+            <p id="text">{{ text }}</p>
         </div>
     </div>
 
     <div class="row" >
-
         <div class="col-10 offset-1">
-        <div id="info">
-        <span><i class="far fa-user"></i><span class="text" id="user"></span></span>
-        <span><i class="far fa-retweet"></i><span class="text" id="retweet"></span></span>
+            <div id="info">
+                <span><i class="far fa-user"></i><span class="text" id="user"></span></span>
+                <span><i class="far fa-retweet"></i><span class="text" id="retweet"></span></span>
 
-        <span><i class="far fa-heart"></i><span class="text" id="favorite"></span></span>
+                <span><i class="far fa-heart"></i><span class="text" id="favorite"></span></span>
 
-        <button type="button" class="float-right" id="next">Give me more!</button>
-        </div>
+                <button type="button" class="float-right" id="next">Give me more!</button>
+            </div>
         </div>
     </div>
-            </div>
 </div>
 {% endblock %}
 
