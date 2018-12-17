@@ -114,7 +114,7 @@ def api():
                    retweet=retweet,
                    favorite=favorite)
 
-@cache.cached(timeout=50, key_prefix='all_comments')
+@cache.cached(timeout=50)
 def get_dataset():
     """
     Cached dataset, Twitter data are requested only once per 50s
