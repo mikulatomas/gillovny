@@ -1,6 +1,5 @@
 <p css="text-align: center">
-<img src="/logo.png?raw=true" alt="logo" srcset="/logo@2x.png?raw=true 2x" />
-![Logo](logo.png?raw=true)
+<img src="/logo.png?raw=true" alt="logo" width="307px" height="319px" />
 </p>
 
 # Gillovny 
