@@ -1,4 +1,6 @@
-<img align="center" src="/logo.png?raw=true" alt="logo" width="307px" height="319px" />
+<p align="center">
+  <img align="center" src="/logo.png?raw=true" alt="logo" width="307px" height="319px" />
+</p>
 
 # Gillovny 
 
