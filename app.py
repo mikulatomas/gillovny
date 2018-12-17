@@ -17,8 +17,8 @@ from flask import Flask, jsonify, redirect, render_template, request, url_for
 from flask_caching import Cache
 from tweepy import OAuthHandler
 
-app = Flask(__name__)
 cache = Cache()
+app = Flask(__name__)
 
 cache_servers = os.environ.get('MEMCACHIER_SERVERS')
 google_id = os.environ.get('GOOGLE_ID')
