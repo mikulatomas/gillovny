@@ -1,10 +1,10 @@
-<p css="text-align: center">
+<p style="text-align: center">
 <img src="/logo.png?raw=true" alt="logo" width="307px" height="319px" />
 </p>
 
 # Gillovny 
 
-Simple Python Flask app for displaying random tweet about Gillovny. Made as gift for my girlfriend. The app is running on [gillovny.info](http://gillovny.info).
+Simple `Python Flask` app for displaying random tweet about Gillovny. Made as gift for my girlfriend. The app is running on [gillovny.info](http://gillovny.info).
 
 ## What? You do not know what 'Gillovny' is?
 Definition according to Urban Dictionary:
@@ -47,8 +47,7 @@ pylibmc
 
 ## Contributing
 
-Mainly for my girlfriend.
-
+Hopefully my GF.
 
 ## Authors
 
