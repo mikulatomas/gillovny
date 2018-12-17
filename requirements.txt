@@ -3,7 +3,7 @@
 # ----------------------
 flask
 tweepy
-flask-caching
+Flask-Caching
 bleach
 
 # ----------------------
